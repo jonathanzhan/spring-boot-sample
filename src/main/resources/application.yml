@@ -1,0 +1,59 @@
+server:
+    port: 8080
+    context-path: #/liuzh/
+
+mybatisRefresh:
+    enabled: true #是否支持xml实时刷新,部署时,改为false
+    delaySeconds: 5  #project start time[项目启动时间]
+    sleepSeconds: 2 # xml scanning interval time[扫描间隔时长]
+    mappingPath: mapper # xml file's path
+
+
+swagger:
+    title: qweqwe
+    description: ww
+    version: 1.0-SNAPSHOT
+    termsOfServiceUrl: qwe
+    contact: we
+    license: qwe
+    licenseUrl: 未完全
+
+mybatis:
+    mapper-locations: classpath*:mapper/*.xml
+    type-aliases-package: com.whatlookingfor.sample.**.entity
+    configLocation: classpath:/mybatis-config.xml
+
+spring:
+  datasource:
+    name: test
+    url: jdbc:mysql://localhost:3306/test
+    username: root
+    password: 123456
+    #使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    filters: stat
+    #配置初始化大小、最小、最大
+    initialSize: 1
+    minIdle: 3
+    maxActive: 20
+    #配置获取连接等待超时的时间
+    maxWait: 60000
+    #配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    timeBetweenEvictionRunsMillis: 60000
+    #配置一个连接在池中最小生存的时间，单位是毫秒
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    #打开PSCache，并且指定每个连接上PSCache的大小（Oracle使用）
+    #poolPreparedStatements: true
+    #maxOpenPreparedStatements: 20
+  mvc:
+      view:
+          prefix: /templates/
+          suffix: .ftl
+      freemarker:
+          cache: false
+          request-context-attribute: request
