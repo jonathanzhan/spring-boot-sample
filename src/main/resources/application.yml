@@ -10,13 +10,16 @@ mybatisRefresh:
 
 
 swagger:
-    title: qweqwe
-    description: ww
-    version: 1.0-SNAPSHOT
-    termsOfServiceUrl: qwe
-    contact: we
-    license: qwe
-    licenseUrl: 未完全
+    title: API docs #标题
+    description: SWAGGER DEMO #描述
+    version: 1.0-SNAPSHOT #版本号
+    termsOfServiceUrl: https://github.com/whatlookingfor
+    license: The Apache License, Version 2.0
+    licenseUrl: http://www.apache.org/licenses/LICENSE-2.0.html #license url
+    author: Jonathan  #作者
+    url: https://github.com/whatlookingfor #链接
+    email: whatlookingfor@gmail.com  #邮箱
+    apiPath: /api/.*,/demo/.*,/swagger/.* #多个以','隔开
 
 mybatis:
     mapper-locations: classpath*:mapper/*.xml

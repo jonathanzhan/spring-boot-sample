@@ -16,20 +16,21 @@
 
 package com.whatlookingfor.sample.config;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Lists;
 import org.springframework.boot.bind.RelaxedPropertyResolver;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.web.context.request.async.DeferredResult;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import java.util.List;
 
 import static com.google.common.base.Predicates.or;
 import static springfox.documentation.builders.PathSelectors.regex;
@@ -44,23 +45,22 @@ import static springfox.documentation.builders.PathSelectors.regex;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfiguration implements EnvironmentAware {
-	private final Logger log = LoggerFactory.getLogger(SwaggerConfiguration.class);
-	public static final String DEFAULT_INCLUDE_PATTERN = "/api/.*";
+
 	private RelaxedPropertyResolver propertyResolver;
+
+	private Contact contact;
+
+	private List<Predicate<String>> components = Lists.newArrayList();
 
 	@Override
 	public void setEnvironment(Environment environment) {
 		this.propertyResolver = new RelaxedPropertyResolver(environment, "swagger.");
+		this.contact = new Contact(propertyResolver.getProperty("author"), propertyResolver.getProperty("url"), propertyResolver.getProperty("email"));
+		String[] regex = propertyResolver.getProperty("apiPath").split(",");
+		for (String str : regex) {
+			components.add(regex(str));
+		}
 	}
-//
-//	@Override
-//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        registry.addResourceHandler("swagger-ui.html")
-//                .addResourceLocations("classpath:/META-INF/resources/");
-//
-//        registry.addResourceHandler("/webjars/**")
-//                .addResourceLocations("classpath:/META-INF/resources/webjars/");
-//    }
 
 
 	@Bean
@@ -72,28 +72,26 @@ public class SwaggerConfiguration implements EnvironmentAware {
 				.forCodeGeneration(true)
 				.pathMapping("/")// base，最终调用接口后会和paths拼接在一起
 				.select()
-				.paths(or(regex("/api/.*")))//过滤的接口
+				.paths(or(components))//过滤的接口
 				.build()
 				.apiInfo(apiInfo());
 	}
 
 	@Bean
-	public Docket demoApi() {
+	public Docket normalApi() {
 		return new Docket(DocumentationType.SWAGGER_2)
-				.groupName("demo")
+				.groupName("api")
 				.genericModelSubstitutes(DeferredResult.class)
-//              .genericModelSubstitutes(ResponseEntity.class)
 				.useDefaultResponseMessages(false)
-				.forCodeGeneration(false)
+				.forCodeGeneration(true)
 				.pathMapping("/")
 				.select()
-				.paths(or(regex("/demo/.*")))//过滤的接口
+				.paths(or(components))//过滤的接口
 				.build()
 				.apiInfo(demoApiInfo());
 	}
 
 	private ApiInfo demoApiInfo() {
-		Contact contact = new Contact("qe","sad","url");
 		return new ApiInfo(
 				propertyResolver.getProperty("title"),
 				propertyResolver.getProperty("description"),
@@ -107,7 +105,6 @@ public class SwaggerConfiguration implements EnvironmentAware {
 
 
 	private ApiInfo apiInfo() {
-		Contact contact = new Contact("qe","sad","url");
 		return new ApiInfo(
 				propertyResolver.getProperty("title"),
 				propertyResolver.getProperty("description"),
