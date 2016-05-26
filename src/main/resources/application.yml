@@ -55,8 +55,5 @@ spring:
     #maxOpenPreparedStatements: 20
   mvc:
       view:
-          prefix: /templates/
-          suffix: .ftl
-      freemarker:
-          cache: false
-          request-context-attribute: request
+          prefix: /WEB-INF/views/
+          suffix: .jsp

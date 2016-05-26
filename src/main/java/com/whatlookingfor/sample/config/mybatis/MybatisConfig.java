@@ -1,17 +1,17 @@
-/**
- *    Copyright  2014-2016 whatlookingfor@gmail.com(Jonathan)
+/*
+ * Copyright  2014-2016 whatlookingfor@gmail.com(Jonathan)
  *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.whatlookingfor.sample.config.mybatis;
@@ -48,8 +48,8 @@ import javax.sql.DataSource;
  * @since JDK 7.0+
  */
 @Configuration
-@EnableConfigurationProperties({MybatisProperties.class,MybatisRefreshProperties.class})
-@ConditionalOnClass({ SqlSessionFactory.class, SqlSessionFactoryBean.class })//允许特定的class出现来跳过配置
+@EnableConfigurationProperties({MybatisProperties.class, MybatisRefreshProperties.class})
+@ConditionalOnClass({SqlSessionFactory.class, SqlSessionFactoryBean.class})//允许特定的class出现来跳过配置
 @AutoConfigureAfter(DataSourceAutoConfiguration.class)
 public class MybatisConfig {
 
@@ -80,6 +80,7 @@ public class MybatisConfig {
 
 	/**
 	 * 定义sqlSessionFactory的bean
+	 *
 	 * @param dataSource
 	 * @return
 	 * @throws Exception
@@ -87,7 +88,7 @@ public class MybatisConfig {
 	@Bean(name = "sqlSessionFactory")
 	@ConditionalOnMissingBean
 	//不允许特定的bean出现来跳过配置
-	public SqlSessionFactory sqlSessionFactory(DataSource dataSource)  throws Exception {
+	public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
 		sqlSessionFactoryBean.setDataSource(dataSource);
 		sqlSessionFactoryBean.setVfs(SpringBootVFS.class);
