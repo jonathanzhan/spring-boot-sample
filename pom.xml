@@ -21,7 +21,6 @@
 	<groupId>com.whatlookingfor</groupId>
 	<artifactId>spring-boot-sample</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<packaging>war</packaging>
 	<name>spring-boot-sample</name>
 	<description>samples of spring-boot</description>
 
@@ -38,7 +37,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jdk.version>1.6</jdk.version>
+		<jdk.version>1.8</jdk.version>
 
 		<!--  依赖版本  -->
 		<mybatis.version>3.4.0</mybatis.version>
@@ -71,13 +70,7 @@
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<!--<scope>provided</scope>-->
-		</dependency>
-		<dependency>
-			<groupId>org.apache.tomcat.embed</groupId>
-			<artifactId>tomcat-embed-jasper</artifactId>
-			<!--<scope>provided</scope>-->
+			<artifactId>spring-boot-starter-freemarker</artifactId>
 		</dependency>
 
 		<dependency>
@@ -86,11 +79,20 @@
 			<scope>test</scope>
 		</dependency>
 
+
+		<!--数据库-->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.0.11</version>
+		</dependency>
 
+
+		<!--jackson-->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
@@ -108,34 +110,28 @@
 			<artifactId>jackson-module-parameter-names</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>druid</artifactId>
-			<version>1.0.11</version>
-		</dependency>
-
 		<!--web-->
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
-		</dependency>
-		<dependency>
-			<groupId>taglibs</groupId>
-			<artifactId>standard</artifactId>
-			<version>1.1.2</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>jsp-api</artifactId>
-			<version>2.2</version>
-			<scope>provided</scope>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>javax.servlet</groupId>-->
+			<!--<artifactId>jstl</artifactId>-->
+			<!--<version>1.2</version>-->
+		<!--</dependency>-->
+		<!--<dependency>-->
+			<!--<groupId>javax.servlet</groupId>-->
+			<!--<artifactId>javax.servlet-api</artifactId>-->
+			<!--<version>3.1.0</version>-->
+		<!--</dependency>-->
+		<!--<dependency>-->
+			<!--<groupId>taglibs</groupId>-->
+			<!--<artifactId>standard</artifactId>-->
+			<!--<version>1.1.2</version>-->
+		<!--</dependency>-->
+		<!--<dependency>-->
+			<!--<groupId>javax.servlet.jsp</groupId>-->
+			<!--<artifactId>jsp-api</artifactId>-->
+			<!--<version>2.2</version>-->
+			<!--<scope>provided</scope>-->
+		<!--</dependency>-->
 
 		<!--Mybatis-->
 		<dependency>
@@ -191,6 +187,7 @@
 			<version>${springfox.version}</version>
 		</dependency>
 
+		<!--工具类-->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>

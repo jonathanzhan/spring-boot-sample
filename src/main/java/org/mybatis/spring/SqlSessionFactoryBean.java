@@ -521,6 +521,7 @@ public class SqlSessionFactoryBean implements FactoryBean<SqlSessionFactory>, In
 		String location = null;
 		if (!isEmpty(this.mapperLocations)) {
 			for (Resource mapperLocation : this.mapperLocations) {
+				LOGGER.debug("mapperLocation的位置是:"+mapperLocation.toString());
 				if (location == null) {
 					location = mapperLocation.toString();
 				}

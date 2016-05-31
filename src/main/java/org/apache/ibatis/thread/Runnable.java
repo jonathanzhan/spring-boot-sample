@@ -79,6 +79,7 @@ public class Runnable implements java.lang.Runnable {
 	public void run() {
 		location = location.substring("file [".length(),
 				location.lastIndexOf(mappingPath) + mappingPath.length());
+		logger.debug("location:"+location);
 		beforeTime = System.currentTimeMillis();
 
 		logger.debug("[location] " + location);

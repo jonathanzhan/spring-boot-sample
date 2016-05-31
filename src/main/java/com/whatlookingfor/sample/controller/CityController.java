@@ -43,9 +43,16 @@ public class CityController {
 	@ApiIgnore
 	@RequestMapping({"","list"})
 	public String list(Model model) {
+
 		List<City> list = cityService.findList();
 		model.addAttribute("list", list);
-		return "modules/cityList";
+		return "modules/city";
+	}
+
+
+	@RequestMapping("404")
+	public String error1() throws Exception{
+		throw new Exception("2qewqewq");
 	}
 
 }

@@ -1,31 +1,22 @@
+# server config
 server:
-    port: 8080
-    context-path: #/liuzh/
-
-mybatisRefresh:
-    enabled: true #是否支持xml实时刷新,部署时,改为false
-    delaySeconds: 5  #project start time[项目启动时间]
-    sleepSeconds: 2 # xml scanning interval time[扫描间隔时长]
-    mappingPath: mapper # xml file's path
-
-
-swagger:
-    title: API docs #标题
-    description: SWAGGER DEMO #描述
-    version: 1.0-SNAPSHOT #版本号
-    termsOfServiceUrl: https://github.com/whatlookingfor
-    license: The Apache License, Version 2.0
-    licenseUrl: http://www.apache.org/licenses/LICENSE-2.0.html #license url
-    author: Jonathan  #作者
-    url: https://github.com/whatlookingfor #链接
-    email: whatlookingfor@gmail.com  #邮箱
-    apiPath: /api/.*,/demo/.*,/swagger/.* #多个以','隔开
-
-mybatis:
-    mapper-locations: classpath*:mapper/*.xml
-    type-aliases-package: com.whatlookingfor.sample.**.entity
-    configLocation: classpath:/mybatis-config.xml
-
+  port: 8080
+  context-path: /spring-boot-sample
+  error:
+    include-stacktrace: always
+    whitelabel:
+      enabled: false
+    path: /error
+# log
+logging:
+  path: /logs
+  file: spring-boot-sample.log
+  level:
+    org.springframework.web: DEBUG
+    dao: DEBUG
+    org.mybatis.spring.SqlSessionFactoryBean: DEBUG
+    org.apache.ibatis.thread: DEBUG
+    com.whatlookingfor.sample: DEBUG
 spring:
   datasource:
     name: test
@@ -50,10 +41,41 @@ spring:
     testWhileIdle: true
     testOnBorrow: false
     testOnReturn: false
-    #打开PSCache，并且指定每个连接上PSCache的大小（Oracle使用）
-    #poolPreparedStatements: true
-    #maxOpenPreparedStatements: 20
   mvc:
-      view:
-          prefix: /WEB-INF/views/
-          suffix: .jsp
+    view:
+      suffix: /templates/
+      prefix: .ftl
+  freemarker:
+    cache: false
+    checkTemplateLocation : false
+    settings:
+      template_update_delay : 0
+      default_encoding : UTF-8
+    request-context-attribute: request
+multipart: #文件上传
+  max-file-size: 30MB #指定文件大小最大值,默认为1MB
+  max-request-size: 30MB #指定每次请求的最大值，默认为10MB
+
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+  type-aliases-package: com.whatlookingfor.sample.**.entity
+  configLocation: classpath:/mybatis-config.xml
+#以下为系统定义
+mybatisRefresh: #mybatis xml实时刷新的配置
+  enabled: true #是否支持xml实时刷新,部署时,改为false
+  delaySeconds: 5  #project start time[项目启动时间]
+  sleepSeconds: 2 # xml scanning interval time[扫描间隔时长]
+  mappingPath: mapper # xml file's path
+
+#swagger ui 定义参数
+swagger:
+  title: API docs #标题
+  description: SWAGGER DEMO #描述
+  version: 1.0-SNAPSHOT #版本号
+  termsOfServiceUrl: https://github.com/whatlookingfor
+  license: The Apache License, Version 2.0
+  licenseUrl: http://www.apache.org/licenses/LICENSE-2.0.html #license url
+  author: Jonathan  #作者
+  url: https://github.com/whatlookingfor #链接
+  email: whatlookingfor@gmail.com  #邮箱
+  apiPath: /api/.*,/demo/.*,/swagger/.* #多个以','隔开

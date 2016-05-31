@@ -40,8 +40,8 @@ import javax.servlet.http.HttpServletResponse;
  * @version 2016/5/25 17:49
  * @since JDK 7.0+
  */
-@EnableWebMvc
-@ComponentScan
+//@EnableWebMvc
+//@ComponentScan
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurerAdapter implements EnvironmentAware {
 
@@ -118,14 +118,14 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter implements Environment
 	 * 定义视图文件解析
 	 * @return
 	 */
-	@Bean
-	public InternalResourceViewResolver viewResolver() {
-		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-		logger.debug("sadsadas");
-		viewResolver.setPrefix("/WEB-INF/views/");
-		viewResolver.setSuffix(".jsp");
-		return viewResolver;
-	}
+//	@Bean
+//	public InternalResourceViewResolver viewResolver() {
+//		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+//		logger.debug("sadsadas");
+//		viewResolver.setPrefix("/WEB-INF/views/");
+//		viewResolver.setSuffix(".jsp");
+//		return viewResolver;
+//	}
 
 
 //	@Override

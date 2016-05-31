@@ -17,14 +17,13 @@
 package com.whatlookingfor.sample;
 
 import com.whatlookingfor.sample.config.StartUpListener;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.context.web.SpringBootServletInitializer;
-import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
+import org.springframework.boot.context.embedded.ErrorPage;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -40,20 +39,26 @@ import javax.sql.DataSource;
  */
 @EnableTransactionManagement
 @SpringBootApplication
-@ServletComponentScan
-public class Application extends SpringBootServletInitializer {
+public class Application {
 
 
-	private static Logger logger = LoggerFactory.getLogger(Application.class);
-
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		return builder.sources(Application.class);
+	public static void main(String[] args) {
+		SpringApplication springApplication = new SpringApplication(Application.class);
+		//添加项目启动的监听类
+		springApplication.addListeners(new StartUpListener());
+		springApplication.run(args);
 	}
+
+
+//	@Override
+//	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+//		return builder.sources(Application.class);
+//	}
 
 
 	/**
 	 * 增加事物管理
+	 *
 	 * @param dataSource
 	 * @return
 	 */
@@ -62,11 +67,7 @@ public class Application extends SpringBootServletInitializer {
 		return new DataSourceTransactionManager(dataSource);
 	}
 
-	public static void main(String[] args) {
-		SpringApplication springApplication = new SpringApplication(Application.class);
-		//添加项目启动的监听类
-		springApplication.addListeners(new StartUpListener());
-		springApplication.run(args);
-	}
+
+
 
 }
