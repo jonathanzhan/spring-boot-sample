@@ -19,7 +19,7 @@ package com.whatlookingfor.sample.model;
 import java.io.Serializable;
 
 /**
- * TODO
+ * 登录用户的简单实体类
  *
  * @author Jonathan
  * @version 2016/5/17 17:51
@@ -27,15 +27,33 @@ import java.io.Serializable;
  */
 public class User implements Serializable{
 
-	private int id;
+	private String id;
 
 	private String name;
 
-	public int getId() {
+	private String loginName;
+
+	private String password;
+
+	public User() {
+		super();
+	}
+
+	public User(String id){
+		this.id = id;
+
+	}
+
+	public User(String id, String loginName){
+		this.id = id;
+		this.loginName = loginName;
+	}
+
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -45,5 +63,31 @@ public class User implements Serializable{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getLoginName() {
+		return loginName;
+	}
+
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"id='" + id + '\'' +
+				", name='" + name + '\'' +
+				", loginName='" + loginName + '\'' +
+				", password='" + password + '\'' +
+				'}';
 	}
 }

@@ -19,6 +19,6 @@
 <mapper namespace="com.whatlookingfor.sample.mapper.CityMapper">
 
 	<select id="findList" resultType="com.whatlookingfor.sample.model.City">
-		select name,id from city
+		select name,id from sys_user
 	</select>
 </mapper>

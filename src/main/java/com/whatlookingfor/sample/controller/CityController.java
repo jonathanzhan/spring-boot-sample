@@ -24,6 +24,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import springfox.documentation.annotations.ApiIgnore;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -51,7 +52,18 @@ public class CityController {
 
 
 	@RequestMapping("404")
-	public String error1() throws Exception{
+	public String error1(HttpServletRequest request) throws Exception{
+		String contentPath = request.getContextPath();
+
+		String realPath = request.getSession().getServletContext()
+				.getRealPath(contentPath);
+
+		String path="static/upload/";
+
+		String rootPathParent = "royalSite";
+
+
+		System.out.println(realPath);
 		throw new Exception("2qewqewq");
 	}
 
